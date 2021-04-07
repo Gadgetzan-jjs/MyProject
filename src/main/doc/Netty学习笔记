@@ -1,0 +1,33 @@
+tcp协议进入
+每一个协议站解析是 in out band（servlet）
+请求有来有回
+支持源生epoll
+eventloopgroup 相当于线程池
+serverbootstrap netty服务，引导类，引导服务器启动程序
+.group 往里边放线程池，worker跑任务，配置角色（谁来监听谁来执行读写操作）
+.channel() 告诉如何获取链接（nio模型）
+.childHandler （in out band）
+.option 设置serversocket属性
+.childOption 设置socket属性
+
+
+
+outbandhandler
+继承channeloutbandhandleradapter类
+把msg向下扔
+知道接受msg，解析，回上一个band，往上递进
+fire 从队列取出下一个，调用下一个的read
+把当前参数拼些东西，变成参数
+
+
+ByteBuf 结构
++--------------------+------------------------+---------------+
+|   discardbale bytes|  readable bytes        |writable bytes |
+|                    |                        |               |
+0              readerIndex                 writerIndex       capacity
+
+
+Unpooled 直接从底层JDK申请内存
+
+
+
